@@ -18,10 +18,7 @@ export default function FadeIn({ children, className = '' }: { children: ReactNo
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} ${className}`}
-    >
+    <div ref={ref} className={`fade-in ${visible ? 'visible' : ''} ${className}`}>
       {children}
     </div>
   );

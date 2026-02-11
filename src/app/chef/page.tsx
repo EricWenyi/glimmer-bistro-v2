@@ -4,10 +4,10 @@ import StoryCard from '@/components/StoryCard';
 
 export default function ChefPage() {
   return (
-    <section className="max-w-[780px] mx-auto px-8 py-24">
+    <section className="content-section" style={{ paddingTop: '6rem' }}>
       <SectionTitle title="The Chef's Story" sub="How Glimmer Bistro Came to Be" />
 
-      <div className="space-y-10">
+      <div className="story-grid">
         <FadeIn>
           <StoryCard title="It Started with a Question ✨">
             <p>What if dinner could feel like a gift? Not a reservation at some crowded spot, but something made just for you — every detail considered, every flavor intentional.</p>

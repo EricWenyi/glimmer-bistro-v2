@@ -6,10 +6,10 @@ import Quote from '@/components/Quote';
 export default function PhilosophyPage() {
   return (
     <>
-      <section className="max-w-[780px] mx-auto px-8 py-24">
+      <section className="content-section" style={{ paddingTop: '6rem' }}>
         <SectionTitle title="Our Philosophy" sub="What We Believe In" />
 
-        <div className="space-y-10">
+        <div className="story-grid">
           <FadeIn>
             <StoryCard title="Simplicity is Sophistication 🌱">
               <p>The best Italian cooking doesn&apos;t hide behind complexity — it celebrates the ingredient. A perfect tomato needs nothing more than salt, olive oil, and basil. We let quality speak for itself.</p>

@@ -9,7 +9,7 @@ export const valentineMenu = [
       'One bread that threads through the entire meal: beneath the burrata, beside the pasta, dipped into the braising jus.',
     ],
     note: 'The quiet backbone of an Italian table',
-    color: 'bg-[var(--peach)]',
+    courseClass: 'bread',
   },
   {
     emoji: '🍅',
@@ -21,7 +21,7 @@ export const valentineMenu = [
       'Creamy, bright, and impossibly beautiful — the colors of Italy on your plate.',
     ],
     accent: 'Your first visual moment of the evening',
-    color: 'bg-[var(--rose)]',
+    courseClass: 'antipasto',
   },
   {
     emoji: '🍝',
@@ -33,7 +33,7 @@ export const valentineMenu = [
       'A restrained, restaurant-caliber course — bright acidity and brine to contrast the creamy richness before.',
     ],
     note: 'Intentionally light — saving room for the main event',
-    color: 'bg-[var(--sage)]',
+    courseClass: 'primo',
   },
   {
     emoji: '🍖',
@@ -45,7 +45,7 @@ export const valentineMenu = [
       'Warm, soulful, and deeply intentional — the kind of dish that says you were worth every hour.',
     ],
     accent: 'The heart of the evening',
-    color: 'bg-[var(--lavender)]',
+    courseClass: 'secondo',
   },
   {
     emoji: '🍮',
@@ -57,6 +57,6 @@ export const valentineMenu = [
       'Soft, bittersweet, and effortlessly romantic — the perfect ending to an evening made with care.',
     ],
     accent: 'Some things are better when they\'ve had time',
-    color: 'bg-[var(--blush)]',
+    courseClass: 'dolce',
   },
 ];
