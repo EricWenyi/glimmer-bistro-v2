@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap');
+
+:root {
+  --cream: #FFF8F2;
+  --warm-white: #FFFAF6;
+  --blush: #E8D5D0;
+  --rose: #C4908A;
+  --rose-soft: #D4A9A4;
+  --rose-pale: #EDD5D1;
+  --sage: #AAC2A0;
+  --sage-light: #C8DCC0;
+  --sage-pale: #E0ECD8;
+  --sage-dot: #8BAF80;
+  --lavender: #D5CCE0;
+  --peach: #F0DDD5;
+  --charcoal: #352F2D;
+  --warm-dark: #4A4340;
+  --warm-gray: #7A716B;
+  --light-gray: #B8AFA8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  overflow-x: hidden;
+}
+
+/* Fonts */
+.font-sacramento { font-family: 'Sacramento', cursive; }
+.font-caveat { font-family: 'Caveat', cursive; }
+.font-josefin { font-family: 'Josefin Sans', sans-serif; }
+.font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
