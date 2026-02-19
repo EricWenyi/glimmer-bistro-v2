@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Glimmer Bistro v2 (MVP In Progress)
 
-## Getting Started
+This workspace now contains two parts:
 
-First, run the development server:
+- `web`: Next.js frontend (`/` and event/recipe pages read dynamic image placements)
+- `backend`: Express + Postgres content API for image upload, placement, and publishing controls
+
+## Architecture (current)
+
+- Frontend: Next.js app (port `3000`)
+- Content API: Express app (port `4000`)
+- Database: Postgres (port `5432`)
+- Storage: Cloudflare R2 (recommended) or local `/uploads` fallback during local testing
+
+## Quick Start
+
+1. Copy env values:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
+cp backend/.env.example backend/.env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start stack with Docker Compose:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker compose -f compose.yml up --build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open:
 
-## Learn More
+- Site: `http://localhost:3000`
+- API health: `http://localhost:4000/health`
 
-To learn more about Next.js, take a look at the following resources:
+## MVP API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `POST /v1/upload` (admin token required)
+  - multipart fields: `image`, `targetType`, `targetKey`, `slot`
+  - optional: `position`, `status(draft|published)`, `caption`, `alt`, `captionOverride`, `altOverride`
+- `GET /v1/content?targetType=event&targetKey=valentine-2026`
+  - returns published content grouped by slot
+- `PATCH /v1/placements/:shortCode` (admin token required)
+  - update status, move target, reorder position, override caption/alt
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Example Upload
 
-## Deploy on Vercel
+```bash
+curl -X POST http://localhost:4000/v1/upload \
+  -H "Authorization: Bearer change_me" \
+  -F "image=@/absolute/path/photo.jpg" \
+  -F "targetType=event" \
+  -F "targetKey=valentine-2026" \
+  -F "slot=gallery" \
+  -F "position=3"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Frontend Mapping
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Home (`targetType=home`, `targetKey=home`): supports `hero`, `gallery`
+- Event page (`/events/valentine`, key `valentine-2026`): supports `hero`, `gallery`
+- Recipe demo (`/recipes/[slug]`, key=`slug`): supports `cover`, `gallery`
+
+Placement short codes are attached as invisible DOM attributes, for example:
+
+- `data-placement-id="P-9K2M1A"`
+
+## Notes
+
+- `glimmer-bistro-requirements.md` asks for R2 + local backend + publish control. This baseline implements those MVP endpoints and models.
+- R2 is optional for local development; set R2 env vars to switch from local file storage to object storage.

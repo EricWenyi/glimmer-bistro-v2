@@ -3,12 +3,27 @@ import FadeIn from '@/components/FadeIn';
 import SectionTitle from '@/components/SectionTitle';
 import StoryCard from '@/components/StoryCard';
 import Quote from '@/components/Quote';
+import { fetchContent } from '@/lib/content';
 
-export default function Home() {
+export const revalidate = 30;
+
+export default async function Home() {
+  const content = await fetchContent('home', 'home');
+  const heroImage = content.hero?.[0];
+  const gallery = content.gallery?.slice(0, 6) ?? [];
+
   return (
     <>
       {/* Hero */}
       <section className="hero">
+        {heroImage && (
+          <img
+            src={heroImage.imageUrl}
+            alt={heroImage.alt || heroImage.caption || 'Glimmer Bistro hero image'}
+            className="hero-media"
+            data-placement-id={heroImage.placementShortCode}
+          />
+        )}
         <FadeIn className="">
           <div className="hero-content">
             <h2>Glimmer Bistro</h2>
@@ -65,6 +80,22 @@ export default function Home() {
           </div>
         </FadeIn>
       </section>
+
+      {gallery.length > 0 && (
+        <section className="content-section" style={{ paddingTop: '2rem' }}>
+          <SectionTitle title="Latest Moments" sub="Captured from our table" />
+          <div className="gallery-grid">
+            {gallery.map((item) => (
+              <FadeIn key={item.placementShortCode}>
+                <figure className="gallery-photo-card" data-placement-id={item.placementShortCode}>
+                  <img src={item.imageUrl} alt={item.alt || item.caption || 'Glimmer Bistro photo'} className="gallery-photo" />
+                  {item.caption && <figcaption>{item.caption}</figcaption>}
+                </figure>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Quote */}
       <Quote

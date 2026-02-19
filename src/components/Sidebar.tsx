@@ -9,6 +9,7 @@ const NAV_MAIN = [
   { href: '/chef', emoji: '👨‍🍳', label: 'The Chef' },
   { href: '/philosophy', emoji: '🌿', label: 'Philosophy' },
   { href: '/gallery', emoji: '🖼️', label: 'Gallery' },
+  { href: '/recipes/tiramisu', emoji: '🍮', label: 'Recipe Demo' },
 ];
 
 const NAV_EVENTS = [
