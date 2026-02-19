@@ -3,6 +3,7 @@ import CourseCard from '@/components/CourseCard';
 import { valentineMenu } from '@/data/menu';
 import FadeIn from '@/components/FadeIn';
 import { fetchContent } from '@/lib/content';
+import EventUploadPanel from '@/components/EventUploadPanel';
 
 export const revalidate = 30;
 
@@ -22,22 +23,30 @@ export default async function ValentinePage() {
         </figure>
       )}
 
-      {gallery.length > 0 && (
-        <div className="event-gallery">
-          {gallery.map((item) => (
-            <FadeIn key={item.placementShortCode}>
-              <figure className="event-gallery-item" data-placement-id={item.placementShortCode}>
-                <img src={item.imageUrl} alt={item.alt || item.caption || 'Event gallery image'} />
-                {item.caption && <figcaption>{item.caption}</figcaption>}
-              </figure>
-            </FadeIn>
-          ))}
-        </div>
-      )}
-
       {valentineMenu.map((course, i) => (
         <CourseCard key={i} {...course} />
       ))}
+
+      <EventUploadPanel eventKey="valentine-2026" />
+
+      <div className="event-gallery-wrap">
+        <SectionTitle title="Event Gallery" sub="Photos appear here after upload" />
+
+        {gallery.length > 0 ? (
+          <div className="event-gallery">
+            {gallery.map((item) => (
+              <FadeIn key={item.placementShortCode}>
+                <figure className="event-gallery-item" data-placement-id={item.placementShortCode}>
+                  <img src={item.imageUrl} alt={item.alt || item.caption || 'Event gallery image'} />
+                  {item.caption && <figcaption>{item.caption}</figcaption>}
+                </figure>
+              </FadeIn>
+            ))}
+          </div>
+        ) : (
+          <p className="gallery-note">No published gallery photos yet. Upload one above to get started.</p>
+        )}
+      </div>
     </section>
   );
 }

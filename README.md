@@ -5,6 +5,11 @@ This workspace now contains two parts:
 - `web`: Next.js frontend (`/` and event/recipe pages read dynamic image placements)
 - `backend`: Express + Postgres content API for image upload, placement, and publishing controls
 
+Operator docs:
+
+- `OPENCLAW_README.md`: upload/retract/move/reorder runbook
+- `AGENTS.md`: development context and quick-start for future coding sessions
+
 ## Architecture (current)
 
 - Frontend: Next.js app (port `3000`)
